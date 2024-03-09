@@ -1,7 +1,6 @@
 # 프로젝트 정보
 
 구현된 [결과물 URL](https://joyful-kelpie-98aa11.netlify.app). \
-Github 저장소 [링크](https://github.com/DohyubLee/test-quiz-app).
 
 ## 구현 내용
 
