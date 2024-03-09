@@ -19,8 +19,6 @@ function TestPage() {
   let { testId } = useParams();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  console.log("quizList", quizList);
-  console.log("testId", testId);
 
   const fetchList = useCallback(async () => {
     setLoading(true);
@@ -54,7 +52,6 @@ function TestPage() {
   return (
     <Space
       direction="vertical"
-      // size="middle"
       style={{
         display: "flex",
         paddingTop: 40,
@@ -67,9 +64,8 @@ function TestPage() {
         .map((item) => {
           const decodedText = parser.parseFromString(item.question, "text/html")
             .body.textContent;
-          console.log("item", item);
           const options = [item.correct_answer, ...item.incorrect_answers];
-          console.log("options", options);
+
           return (
             <Card
               rootClassName="quiz-card"

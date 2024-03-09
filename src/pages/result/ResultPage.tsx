@@ -8,20 +8,26 @@ import {
   Flex,
   Progress,
   Row,
-  Space,
   Typography,
 } from "antd";
 import React from "react";
-const { Title, Text } = Typography;
+import { useNavigate } from "react-router-dom";
+const { Title } = Typography;
 
 function ResultPage() {
+  const navigate = useNavigate();
   const { currentTime, quizList } = useStore();
+  const correctAnswerCount = quizList.filter(
+    (quiz) => quiz.correct_answer === quiz.selectedAnswer
+  ).length;
+  const correctRate = Math.floor((correctAnswerCount / quizList.length) * 100);
+
   return (
     <div>
       <Title>결과 확인하기</Title>
       <Title level={3}>소요시간 : {formatTime(currentTime)}</Title>
       <Card
-        title="정답률"
+        title="결과 현황"
         extra={
           <Button
             type="primary"
@@ -46,7 +52,7 @@ function ResultPage() {
               status="success"
               text={
                 <p style={{ display: "inline" }}>
-                  정답 개수 <b>7</b>
+                  정답 개수 <b>{correctAnswerCount}</b>
                 </p>
               }
             />
@@ -54,17 +60,16 @@ function ResultPage() {
               status="error"
               text={
                 <p style={{ display: "inline" }}>
-                  오답 개수 <b>7</b>
+                  오답 개수 <b>{quizList.length - correctAnswerCount}</b>
                 </p>
               }
             />
           </Col>
           <Col>
-            {/* <Text strong>정답률</Text> */}
             <Progress
-              percent={30}
+              percent={correctRate}
               success={{
-                percent: 30,
+                percent: correctRate,
               }}
               type="circle"
               trailColor="#FF4D4F"
@@ -73,7 +78,13 @@ function ResultPage() {
         </Row>
       </Card>
       <Flex justify="center" style={{ paddingTop: 40 }}>
-        <Button>처음으로 돌아가기</Button>
+        <Button
+          onClick={() => {
+            navigate(`/`);
+          }}
+        >
+          처음으로 돌아가기
+        </Button>
       </Flex>
     </div>
   );

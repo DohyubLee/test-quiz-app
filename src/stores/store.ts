@@ -17,8 +17,6 @@ export interface CustomQuiz extends Quiz {
 }
 
 interface Store {
-  count: number;
-  inc: () => void;
   fetchQuizList: (amount?: number) => Promise<any>;
   quizList: CustomQuiz[];
   setQuizList: (order: number, answer: string) => void;
@@ -27,23 +25,28 @@ interface Store {
   stopTimer: (intervalId: NodeJS.Timer) => void;
   intervalId: NodeJS.Timer | null;
   setIntervalId: (intervalId: NodeJS.Timer) => void;
+  reset: () => void;
 }
 
-const useStore = create<Store>((set) => ({
-  count: 1,
-  inc: () => {
-    set((state) => ({ count: state.count + 1 }));
-  },
+const INITIALSTATE = {
   quizList: [],
+  currentTime: 0,
+  intervalId: null,
+};
+
+const useStore = create<Store>((set) => ({
+  ...cloneDeep(INITIALSTATE),
   fetchQuizList: async (amount = 10) => {
     const data = await fetchQuizList(amount);
-    set((state) => ({
-      quizList:
-        data?.results.map((item: Quiz, index: number) => ({
-          ...item,
-          order: index + 1,
-        })) ?? [],
-    }));
+    if (data?.results) {
+      set((state) => ({
+        quizList:
+          data.results.map((item: Quiz, index: number) => ({
+            ...item,
+            order: index + 1,
+          })) ?? [],
+      }));
+    }
   },
   setQuizList: (order: number, answer: string) => {
     set((state) => {
@@ -58,7 +61,6 @@ const useStore = create<Store>((set) => ({
       };
     });
   },
-  currentTime: 0,
   startTimer: () => {
     // 타이머 시작 함수
     const intervalId = setInterval(() => {
@@ -70,9 +72,11 @@ const useStore = create<Store>((set) => ({
     // 타이머 정지 함수
     clearInterval(intervalId); // setInterval을 멈춤
   },
-  intervalId: null,
   setIntervalId: (intervalId: NodeJS.Timer) => {
     set((state) => ({ intervalId: intervalId }));
+  },
+  reset: () => {
+    set((state) => ({ ...INITIALSTATE }));
   },
 }));
 
