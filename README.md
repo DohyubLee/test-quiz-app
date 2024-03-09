@@ -1,6 +1,6 @@
 # 프로젝트 정보
 
-구현된 [결과물 URL](https://joyful-kelpie-98aa11.netlify.app). \
+구현된 [결과물 URL](https://joyful-kelpie-98aa11.netlify.app).
 
 ## 구현 내용
 
