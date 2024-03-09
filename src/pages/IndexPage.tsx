@@ -4,15 +4,8 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function IndexPage() {
-  const {
-    startTimer,
-    setIntervalId,
-    quizList,
-    intervalId,
-    currentTime,
-    stopTimer,
-    reset,
-  } = useStore();
+  const { startTimer, setIntervalId, intervalId, stopTimer, reset } =
+    useStore();
   const navigate = useNavigate();
 
   const startQuiz = () => {
