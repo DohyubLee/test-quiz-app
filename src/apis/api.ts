@@ -6,7 +6,7 @@ const baseURL = "https://opentdb.com/api.php";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL,
-  timeout: 5000,
+  timeout: 3000,
 });
 
 export default axiosInstance;

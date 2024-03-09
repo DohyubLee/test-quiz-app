@@ -79,6 +79,7 @@ function TestPage() {
 
             return (
               <Card
+                key={item.order}
                 rootClassName="quiz-card"
                 title={decodedText}
                 extra={
@@ -100,9 +101,9 @@ function TestPage() {
                   value={item.selectedAnswer}
                 >
                   <Space direction="vertical">
-                    {options.map((option) => {
+                    {options.map((option: string, index: number) => {
                       return (
-                        <Radio value={option}>
+                        <Radio value={option} key={index}>
                           <div>
                             {item.selectedAnswer ? (
                               option === item.selectedAnswer ? (

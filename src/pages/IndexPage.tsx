@@ -10,6 +10,7 @@ function IndexPage() {
     quizList,
     intervalId,
     currentTime,
+    stopTimer,
     reset,
   } = useStore();
   const navigate = useNavigate();
@@ -22,6 +23,9 @@ function IndexPage() {
 
   useEffect(() => {
     reset();
+    if (intervalId) {
+      stopTimer(intervalId);
+    }
   }, []);
   return (
     <div
