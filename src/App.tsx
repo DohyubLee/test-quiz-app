@@ -2,14 +2,14 @@ import React from "react";
 import "./App.css";
 import { Link, Outlet } from "react-router-dom";
 import Layout, { Content, Footer, Header } from "antd/es/layout/layout";
+import QuizIcon from "@components/icon/QuizIcon";
+import { Col, Row } from "antd";
 
 const headerStyle: React.CSSProperties = {
-  textAlign: "center",
-  color: "#fff",
-  height: 64,
-  paddingInline: 48,
-  lineHeight: "64px",
-  backgroundColor: "#4096ff",
+  height: 100,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 };
 
 const contentStyle: React.CSSProperties = {
@@ -27,31 +27,28 @@ const footerStyle: React.CSSProperties = {
 };
 
 const layoutStyle = {
-  borderRadius: 8,
-  overflow: "hidden",
+  // borderRadius: 8,
+  // overflow: "hidden",
   // width: "calc(50% - 8px)",
   // maxWidth: "calc(50% - 8px)",
 };
 
 function App() {
   return (
-    <div className="App">
-      <Layout style={layoutStyle}>
-        <Header style={headerStyle}>
-          {/* <nav>
-            <ul>
-              <li>
-                <Link to={`content`}>Your Name</Link>
-              </li>
-            </ul>
-          </nav> */}
-        </Header>
-        <Content style={contentStyle}>
-          <Outlet />
-        </Content>
-        <Footer style={footerStyle}></Footer>
-      </Layout>
-    </div>
+    <Layout style={layoutStyle}>
+      <Header style={headerStyle}>
+        <QuizIcon width={70} height={70} />
+      </Header>
+      <Content style={contentStyle}>
+        <Row justify="center">
+          <Col span={24} lg={{ span: 16 }}>
+            col
+            <Outlet />
+          </Col>
+        </Row>
+      </Content>
+      <Footer style={footerStyle}></Footer>
+    </Layout>
   );
 }
 
