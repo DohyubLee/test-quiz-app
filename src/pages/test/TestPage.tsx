@@ -1,4 +1,5 @@
 import useStore, { CustomQuiz } from "@stores/store";
+import { formatTime } from "@utils/formatUtile";
 import { Button, Card, Radio, RadioChangeEvent, Space, Typography } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,7 +8,14 @@ const { Text } = Typography;
 const parser = new DOMParser();
 
 function TestPage() {
-  const { fetchQuizList, quizList, setQuizList } = useStore();
+  const {
+    fetchQuizList,
+    quizList,
+    setQuizList,
+    currentTime,
+    stopTimer,
+    intervalId,
+  } = useStore();
   let { testId } = useParams();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -24,9 +32,14 @@ function TestPage() {
     (testId: number) => {
       if (testId < quizList.length) {
         navigate(`/test/${testId + 1}`);
+      } else {
+        // 타이머 종료
+        if (intervalId) {
+          stopTimer(intervalId);
+        }
       }
     },
-    [quizList.length]
+    [quizList.length, intervalId]
   );
 
   const onChange = (e: RadioChangeEvent, order: number) => {
@@ -112,10 +125,9 @@ function TestPage() {
             </Card>
           );
         })}
+      {formatTime(currentTime)}
     </Space>
   );
 }
-{
-  /* <Text type="success">{option}</Text> */
-}
+
 export default TestPage;

@@ -22,6 +22,11 @@ interface Store {
   fetchQuizList: (amount?: number) => Promise<any>;
   quizList: CustomQuiz[];
   setQuizList: (order: number, answer: string) => void;
+  currentTime: number;
+  startTimer: () => NodeJS.Timer;
+  stopTimer: (intervalId: NodeJS.Timer) => void;
+  intervalId: NodeJS.Timer | null;
+  setIntervalId: (intervalId: NodeJS.Timer) => void;
 }
 
 const useStore = create<Store>((set) => ({
@@ -51,6 +56,22 @@ const useStore = create<Store>((set) => ({
         }),
       };
     });
+  },
+  currentTime: 0,
+  startTimer: () => {
+    // 타이머 시작 함수
+    const intervalId = setInterval(() => {
+      set((state) => ({ currentTime: state.currentTime + 1000 })); // 1초마다 currentTime을 업데이트
+    }, 1000);
+    return intervalId; // intervalId 반환 (필요시 clearInterval을 호출하기 위해)
+  },
+  stopTimer: (intervalId: NodeJS.Timer) => {
+    // 타이머 정지 함수
+    clearInterval(intervalId); // setInterval을 멈춤
+  },
+  intervalId: null,
+  setIntervalId: (intervalId: NodeJS.Timer) => {
+    set((state) => ({ intervalId: intervalId }));
   },
 }));
 
