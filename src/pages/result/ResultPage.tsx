@@ -33,7 +33,7 @@ function ResultPage() {
             type="primary"
             size="small"
             onClick={() => {
-              console.log("오답노트 보러가기");
+              navigate(`/Incorrect-answer-note`);
             }}
           >
             오답노트

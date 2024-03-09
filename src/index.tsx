@@ -8,6 +8,7 @@ import TestPage from "@pages/test/TestPage";
 import IndexPage from "@pages/IndexPage";
 import ErrorPage from "@pages/ErrorPage";
 import ResultPage from "@pages/result/ResultPage";
+import IncorrectAnswerNotePage from "@pages/Incorrect-answer-note/IncorrectAnswerNotePage";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
       { index: true, element: <IndexPage /> },
       { path: "/test/:testId", element: <TestPage /> },
       { path: "/result", element: <ResultPage /> },
+      { path: "/Incorrect-answer-note", element: <IncorrectAnswerNotePage /> },
     ],
     errorElement: <ErrorPage />,
   },
