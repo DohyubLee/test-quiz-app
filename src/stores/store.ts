@@ -38,10 +38,11 @@ const useStore = create<Store>((set) => ({
   fetchQuizList: async (amount = 10) => {
     const data = await fetchQuizList(amount);
     set((state) => ({
-      quizList: data.results.map((item: Quiz, index: number) => ({
-        ...item,
-        order: index + 1,
-      })),
+      quizList:
+        data?.results.map((item: Quiz, index: number) => ({
+          ...item,
+          order: index + 1,
+        })) ?? [],
     }));
   },
   setQuizList: (order: number, answer: string) => {

@@ -36,6 +36,7 @@ function TestPage() {
         // 타이머 종료
         if (intervalId) {
           stopTimer(intervalId);
+          navigate(`/result`);
         }
       }
     },
@@ -48,7 +49,7 @@ function TestPage() {
   };
 
   useEffect(() => {
-    // fetchList();
+    fetchList();
   }, []);
   return (
     <Space

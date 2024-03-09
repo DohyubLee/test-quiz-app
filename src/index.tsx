@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import TestPage from "@pages/test/TestPage";
 import IndexPage from "@pages/IndexPage";
 import ErrorPage from "@pages/ErrorPage";
+import ResultPage from "@pages/result/ResultPage";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <IndexPage /> },
       { path: "/test/:testId", element: <TestPage /> },
+      { path: "/result", element: <ResultPage /> },
     ],
     errorElement: <ErrorPage />,
   },

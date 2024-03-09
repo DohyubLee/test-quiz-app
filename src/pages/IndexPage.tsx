@@ -28,7 +28,7 @@ function IndexPage() {
           startQuiz();
         }}
       >
-        퀴즈 풀기 시작하기
+        퀴즈 시작하기
       </Button>
     </div>
   );
