@@ -6,15 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import TestPage from "@pages/test/TestPage";
 import IndexPage from "@pages/IndexPage";
+import ErrorPage from "@pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "/test", element: <TestPage /> },
       { index: true, element: <IndexPage /> },
+      { path: "/test/:testId", element: <TestPage /> },
     ],
+    errorElement: <ErrorPage />,
   },
 ]);
 

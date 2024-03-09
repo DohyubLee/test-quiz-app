@@ -17,7 +17,7 @@ function IndexPage() {
         type="primary"
         size="large"
         onClick={() => {
-          navigate("/test");
+          navigate("/test/1");
         }}
       >
         퀴즈 풀기 시작하기
